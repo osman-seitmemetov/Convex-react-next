@@ -1,0 +1,25 @@
+.input {
+    margin-bottom: 20px;
+    //z-index: 5;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    &__title {
+        font-family: "Museo Sans Cyrl", sans-serif;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    &_hidden {
+        display: none;
+    }
+}
+
+.input_disabled {
+    .input__title {
+        color: var(--color-wistful-or-dove-gray);
+    }
+}

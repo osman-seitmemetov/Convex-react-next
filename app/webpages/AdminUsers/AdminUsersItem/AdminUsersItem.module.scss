@@ -1,0 +1,33 @@
+@import "../../../assets/scss/mixins/breakpoint";
+
+.item {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--color-gallery-or-tundora);
+    height: fit-content;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+
+    &:hover {
+        .arrow {
+            transform: rotate(-180deg) translateX(-2px);
+        }
+    }
+}
+
+.role {
+    text-transform: uppercase;
+    margin-right: 5px;
+}
+.right {
+    display: flex;
+    align-items: center;
+}
+
+.arrow {
+    fill: var(--color-mine-shaft-or-white);
+    transform: rotate(-180deg);
+    transition: 300ms;
+}
