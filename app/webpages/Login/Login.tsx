@@ -13,17 +13,13 @@ import {PASSWORD_RECOVERY_ROUTE, REGISTRATION_ROUTE} from "@/utils/consts";
 import {Controller, SubmitHandler, useForm} from "react-hook-form";
 import {useRouter} from "next/router";
 import {useActions} from "@/hooks/useActions";
+import {useAuth} from "@/hooks/useAuth";
 
-
-// interface LoginProps {
-//     login: (email: string, password: string) => void
-//     isAuth: boolean
-// }
 
 const Login: FC = () => {
     const router = useRouter();
-
-    // if (isAuth) router.push('/profile');
+    const {user} = useAuth();
+    if (user) router.push('/profile');
 
     interface ILoginFields {
         email: string,

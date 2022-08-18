@@ -17,6 +17,8 @@ import InputTel from "@/components/UI/InputGroup/InputTel/InputTel";
 import {Controller, SubmitHandler, useForm} from "react-hook-form";
 import {useActions} from "@/hooks/useActions";
 import {genderTypes} from "@/models/IUser";
+import {useAuth} from "@/hooks/useAuth";
+import {useRouter} from "next/router";
 
 
 const options: IOption[] = [
@@ -73,6 +75,10 @@ const Registration: FC = () => {
             reset();
         }
     }
+
+    const router = useRouter();
+    const {user} = useAuth();
+    // if (user) router.push('/profile');
 
     const [startDate, setStartDate] = useState<Date | null>(null);
 

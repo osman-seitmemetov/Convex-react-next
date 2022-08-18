@@ -1,16 +1,17 @@
 import type {NextPage} from 'next'
 import Header, {headerTypes} from "@/components/Header/Header";
 import Registration from "@/webpages/Registration/Registration";
+import Meta from "@/utils/Meta/Meta";
 
-const ContactPage: NextPage = () => {
+const RegistrationPage: NextPage = () => {
     return (
-        <>
-            <Header/>
+        <Meta title="Регистрация">
+            <Header type={headerTypes.auth}/>
             <div className="main">
                 <Registration />
             </div>
-        </>
+        </Meta>
     )
 }
 
-export default ContactPage;
+export default RegistrationPage;

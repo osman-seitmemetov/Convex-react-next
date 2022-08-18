@@ -6,6 +6,7 @@ import AuthProvider from "./AuthProvider/AuthProvider";
 import MobileMenu from "@/components/MobileMenu/MobileMenu";
 import {QueryClient, QueryClientProvider} from "react-query";
 import {ThemeProvider} from "next-themes";
+import HeadProvider from "./HeadProvider/HeadProvider";
 
 
 const queryClient = new QueryClient({
@@ -18,17 +19,19 @@ const queryClient = new QueryClient({
 
 const MainProvider: FC<TypeComponentAuthFields> = ({children, Component}) => {
     return (
-        <Provider store={store}>
-            {/*@ts-ignore*/}
-            <QueryClientProvider client={queryClient}>
-                <ThemeProvider defaultTheme="light">
-                    <AuthProvider Component={Component}>
-                        {children}
-                        <MobileMenu/>
-                    </AuthProvider>
-                </ThemeProvider>
-            </QueryClientProvider>
-        </Provider>
+        <HeadProvider>
+            <Provider store={store}>
+                {/*@ts-ignore*/}
+                <QueryClientProvider client={queryClient}>
+                    <ThemeProvider defaultTheme="light">
+                        <AuthProvider Component={Component}>
+                            {children}
+                            <MobileMenu/>
+                        </AuthProvider>
+                    </ThemeProvider>
+                </QueryClientProvider>
+            </Provider>
+        </HeadProvider>
     )
 }
 

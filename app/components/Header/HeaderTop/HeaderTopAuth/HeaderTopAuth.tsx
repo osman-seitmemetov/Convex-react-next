@@ -39,7 +39,7 @@ const HeaderTopAuth: FC<HeaderTopAuthProps> = ({user}) => {
                 isOpen &&
                 <div
                     className={style.dropdown}
-                    onClick={(e) => e.stopPropagation()}
+                    onClick={(e) => {e.stopPropagation()}}
                 >
                     <div className={style.head}>
                         <div className={style.balance}>Ваш баланс: 140 000тг</div>
