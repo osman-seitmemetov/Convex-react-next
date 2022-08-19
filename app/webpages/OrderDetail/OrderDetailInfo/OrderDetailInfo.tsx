@@ -1,11 +1,18 @@
 import {FC} from "react";
 import style from './OrderDetailInfo.module.scss';
 import ButtonGreen from "@/components/UI/buttons/ButtonGreen/ButtonGreen";
-import {buttonTypes} from "@/components/UI/buttons/ButtonGreen/ButtonGreenEnums";
 import {ORDERS_ROUTE} from "@/utils/consts";
 import Link from "next/link";
+import {IOrder, orderStatuses, orderTypes} from "@/models/IOrder";
+import {convertPostgresDate} from "../../../helpers/convertPostgresDate";
+import {IUser} from "@/models/IUser";
 
-const OrderDetailInfo: FC = () => {
+
+interface OrderDetailInfoProps {
+    order: IOrder | undefined
+}
+
+const OrderDetailInfo: FC<OrderDetailInfoProps> = ({order}) => {
     return (
         <div className={style.historyDetailInfo}>
             <Link href={ORDERS_ROUTE}>
@@ -21,56 +28,47 @@ const OrderDetailInfo: FC = () => {
             <div className={style.head}>
                 <div className={style.info}>
                     <span>Дата заявки:</span>
-                    12.05.2020 10:19
+                    {convertPostgresDate(String(order?.requestDate))}
                 </div>
 
-                <div className={`${style.status} ${style.status_inactive}`}>Не оплачен</div>
+                {order?.status === orderStatuses.PAID && <div className={`${style.status} ${style.status_active}`}>Оплачено</div>}
+                {order?.status === orderStatuses.NOT_PAID && <div className={`${style.status} ${style.status_inactive}`}>Не оплачен</div>}
             </div>
 
-            <div className={style.title}>Заказ №1012</div>
+            <div className={style.title}>Заказ №{order?.id}</div>
 
             <div className={style.list}>
                 <div className={style.info}>
-                    <span>Статус учреждения:</span>
-                    –
+                    <span>Тип заказа:</span>
+                    {order?.type === orderTypes.PARCEL && "Бандероль"}
                 </div>
 
                 <div className={style.info}>
                     <span>Дата планируемой доставки:</span>
-                    –
-                </div>
-
-                <div className={style.info}>
-                    <span>Учреждение:</span>
-                    ЛА-155/18 (СИЗО)
-                </div>
-
-                <div className={style.info}>
-                    <span>Получатель:</span>
-                    Иван Иванов
+                    {convertPostgresDate(String(order?.deliveryDate))}
                 </div>
             </div>
 
             <div className={`${style.list} ${style.list_justify}`}>
                 <div className={style.info}>
                     <span>Сумма заказа</span>
-                    11 000 тг.
+                    {order?.orderSum} руб.
                 </div>
 
                 <div className={style.info}>
                     <span>Доставка</span>
-                    1 500 тг.
+                    {order?.deliverySum} руб.
                 </div>
 
                 <hr />
 
                 <div className={style.info}>
                     <span>Итого</span>
-                    12 500 тг.
+                    {order?.globalSum} руб.
                 </div>
             </div>
 
-            <ButtonGreen type={buttonTypes.button} className={style.btn}>Повторить заказ</ButtonGreen>
+            <ButtonGreen type="button" className={style.btn}>Повторить заказ</ButtonGreen>
         </div>
     );
 }

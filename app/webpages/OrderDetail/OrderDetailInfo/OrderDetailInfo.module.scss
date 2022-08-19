@@ -130,6 +130,7 @@
 }
 
 .status {
+    user-select: none;
     font-family: "Museo Sans Cyrl", sans-serif;
     font-weight: 700;
     font-size: 12px;
@@ -140,9 +141,11 @@
 }
 
 .status_active {
+    user-select: none;
     background-color: var(--color-emerald);
 }
 
 .status_inactive {
+    user-select: none;
     background-color: var(--color-golden-tainoi);
 }
