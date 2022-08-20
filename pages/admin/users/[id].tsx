@@ -5,8 +5,15 @@ import AdminUser from "@/webpages/AdminUser/AdminUser";
 import {IUser} from "@/models/IUser";
 import {UserService} from "@/services/UserService";
 import {NextPageAuth} from "@/types/authProvider";
+import {useRouter} from "next/router";
+
 
 const AdminUserPage: NextPageAuth<{user: IUser}> = ({user}) => {
+    const router = useRouter();
+    if (router.isFallback) {
+        return <div>Loading...</div>
+    }
+
     return (
         <>
             <Header type={headerTypes.auth} />
@@ -18,32 +25,30 @@ const AdminUserPage: NextPageAuth<{user: IUser}> = ({user}) => {
 }
 
 AdminUserPage.isOnlyAdmin = true;
-
 export default AdminUserPage;
 
-
-export const getStaticPaths: GetStaticPaths = async () => {
-    try {
-        const { data: users } = await UserService.getAll();
-        const paths = users.map((user) => ({
-            params: { id: user.id.toString() },
-        }))
-
-        return { paths, fallback: 'blocking' }
-    } catch {
-        return {
-            paths: [],
-            fallback: false,
-        }
-    }
-}
-
-
 export const getStaticProps: GetStaticProps = async ({params}) => {
+
     const {data: user} = await UserService.getById(String(params?.id));
     console.log(user)
 
     return {
         props: {user: user}
+    }
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+    try {
+        const { data: users } = await UserService.getAll();
+        const paths = users.map(({id}) => ({
+            params: { id: id.toString() },
+        }))
+
+        return { paths, fallback: 'blocking' };
+    } catch {
+        return {
+            paths: [],
+            fallback: false,
+        }
     }
 }

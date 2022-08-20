@@ -4,10 +4,11 @@ import MaskedInput from "react-maskedinput";
 
 interface InputTelProps extends InputHTMLAttributes<HTMLInputElement> {
     error?: any,
-    mask: string
+    mask: string,
+    disabled?: boolean
 }
 
-const InputTel: FC<InputTelProps> = ({error, className, mask, ...rest}) => {
+const InputTel: FC<InputTelProps> = ({error, className, ...rest}) => {
     return (
         <>
             <MaskedInput
@@ -15,7 +16,6 @@ const InputTel: FC<InputTelProps> = ({error, className, mask, ...rest}) => {
                 inputMode="tel"
                 type="tel"
                 {...rest}
-                mask={mask}
             />
             {error && <div className={styles.errorLog}>{error}</div>}
         </>

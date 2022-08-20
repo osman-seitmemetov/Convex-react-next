@@ -8,27 +8,17 @@ interface CustomSelectProps {
     placeholder: string,
     value: string | IOption | undefined,
     onChange?: any,
-    error?: any
+    error?: any,
+    disabled?: boolean
 }
 
-const CustomSelect: FC<CustomSelectProps> = ({error, ...rest}) => {
-    // const [currentOption, setCurrentOption] = useState<string | null>(null);
-    //
-    // const getValue = () => {
-    //     return currentOption
-    //         ? options.find(c => c.value === currentOption)
-    //         : null
-    // }
-    //
-    // const onChange = (newValue: SingleValue<IOption>/*OnChangeValue<string, boolean>*/) => {
-    //     if(newValue) setCurrentOption(newValue.value);
-    // }
-
+const CustomSelect: FC<CustomSelectProps> = ({error, disabled, ...rest}) => {
     return (
         <>
             <Select
                 isSearchable={false}
                 classNamePrefix="select"
+                isDisabled={disabled}
                 {...rest}
             />
             {error && <div className={styles.errorLog}>{error}</div>}

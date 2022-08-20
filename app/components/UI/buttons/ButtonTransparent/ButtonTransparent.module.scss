@@ -1,6 +1,7 @@
 @import "../../../../assets/scss/mixins/breakpoint";
 
 .button {
+    user-select: none;
     cursor: pointer;
     display: inline-flex;
     align-items: center;

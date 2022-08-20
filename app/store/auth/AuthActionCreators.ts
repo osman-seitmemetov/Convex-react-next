@@ -5,6 +5,8 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 import {RegistrationResponse} from "@/models/response/RegistrationResponse";
 import {ILogin, IRegistration} from "@/types/types";
 import {axiosClassic} from "../../api/interceptots";
+import {IUser} from "@/models/IUser";
+import {IEditData, UserService} from "@/services/UserService";
 
 
 export const login = createAsyncThunk<LoginResponse, ILogin>('auth/login', async (
@@ -47,6 +49,29 @@ export const registration = createAsyncThunk<RegistrationResponse, IRegistration
             email, password, gender,
             lastName, name, phone, bornDate
         );
+
+        return response.data;
+    } catch (error) {
+        console.log(error);
+        return thunkAPI.rejectWithValue(error);
+    }
+});
+
+export const editProfile = createAsyncThunk<IUser, IEditData>('user/edit', async (
+    {
+        email,
+        password,
+        gender,
+        lastName,
+        name,
+        phone,
+        bornDate
+    }, thunkAPI
+) => {
+    try {
+        const response = await UserService.editProfile({
+            email, password, gender, lastName, name, phone, bornDate
+        });
 
         return response.data;
     } catch (error) {

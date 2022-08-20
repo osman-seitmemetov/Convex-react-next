@@ -1,9 +1,8 @@
-import { FC, useState } from "react";
+import {FC, useState} from "react";
 import style from "./HeaderTopAuth.module.scss";
 import {IUser} from "@/models/IUser";
 import Arrow from "@/components/Arrow/Arrow";
 import NavLink from "@/components/NavLink/NavLink";
-import Link from "next/link";
 import {useActions} from "@/hooks/useActions";
 
 interface HeaderTopAuthProps {

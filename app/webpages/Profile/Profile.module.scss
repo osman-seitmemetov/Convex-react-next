@@ -1,6 +1,10 @@
 @import "../../assets/scss/mixins/breakpoint";
 
 .profile {
+    max-width: 100%;
+    min-width: 100%;
+    width: 100%;
+
     &__title {
         font-weight: 700;
         font-size: 18px;

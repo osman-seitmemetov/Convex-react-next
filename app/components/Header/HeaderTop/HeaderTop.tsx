@@ -21,7 +21,6 @@ const HeaderTop: FC<HeaderTopProps> = ({type}) => {
     if (type === headerTypes.auth) isRender = true;
 
     const {user, isLoading} = useAuth();
-    console.log(user)
 
     const {theme, setTheme} = useTheme();
 

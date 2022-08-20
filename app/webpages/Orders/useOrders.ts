@@ -1,13 +1,14 @@
 import {useQuery} from "react-query";
 import {UserService} from "@/services/UserService";
+import {OrderService} from "@/services/OrderService";
 
-export const useUsers = () => {
+export const useOrders = () => {
     const {
         isLoading,
-        data: users,
+        data: orders,
         error,
         status
-    } = useQuery('all products', () => UserService.getAll(), {
+    } = useQuery('all orders', () => OrderService.getAll(), {
         onSuccess: ({data}) => {
 
         },
@@ -16,5 +17,5 @@ export const useUsers = () => {
         },
     });
 
-    return {isLoading, users}
+    return {isLoading, orders}
 }

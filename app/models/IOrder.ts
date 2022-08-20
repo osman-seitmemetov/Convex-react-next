@@ -1,19 +1,24 @@
-import {IProduct} from "../types/types";
+import {IProduct} from "@/models/IProduct";
 
-export enum statusTypes {
+export enum orderStatuses {
     NOT_PAID = "NOT_PAID",
     PAID = "PAID"
 }
 
+export enum orderTypes {
+    PARCEL = "PARCEL"
+}
+
 export interface IOrder {
     id: number,
-    status: statusTypes,
+    userId: number,
+    status: orderStatuses,
     deliveryAddress: string,
     requestDate: string,
     deliveryDate: string,
     orderSum: number,
     deliverySum: number,
     globalSum: number,
-    // type: typesEnum,
-    products: IProduct[]
+    type: orderTypes,
+    order_products: IProduct[]
 }

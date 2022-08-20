@@ -9,17 +9,15 @@ interface InputDateProps {
     mask: string,
     error?: any,
     onChange?: any,
-    startDate: Date | null
+    selected: Date | null,
+    disabled?: boolean
 }
 
-const InputDate: FC<InputDateProps> = ({dateFormat, placeholder, mask, error, onChange, startDate, ...rest}) => {
-    // const [startDate, setStartDate] = useState<Date | null>(null);
-
+const InputDate: FC<InputDateProps> = ({dateFormat, placeholder, mask, error, onChange, selected, ...rest}) => {
     return (
         <>
             <DatePicker
-                selected={startDate}
-                // onChange={(date: Date | null) => setStartDate(date)}
+                selected={selected}
                 onChange={onChange}
                 dateFormat={dateFormat}
                 placeholderText={placeholder}

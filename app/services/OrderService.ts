@@ -1,15 +1,12 @@
-import {IUser} from "@/models/IUser";
-import {instance} from "../api/interceptots";
-import axios from "axios";
+import {axiosClassic} from "../api/interceptots";
+import {IOrder} from "@/models/IOrder";
 
-export const UserService = {
+export const OrderService = {
     async getAll() {
-        // return await instance.get<IUser[]>('/user/users');
-        return await axios.get<IUser[]>('http://localhost:5000/api/user/users', {withCredentials: true});
+        return await axiosClassic.get<IOrder[]>('/order');
     },
 
     async getById(id: string) {
-        // return await instance.get<IUser>(`/user/${id}`);
-        return await axios.get<IUser>(`http://localhost:5000/api/user/${id}`, {withCredentials: true});
+        return await axiosClassic.get<IOrder>(`/order/${id}`);
     }
 }

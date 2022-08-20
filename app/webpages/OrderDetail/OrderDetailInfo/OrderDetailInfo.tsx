@@ -4,7 +4,7 @@ import ButtonGreen from "@/components/UI/buttons/ButtonGreen/ButtonGreen";
 import {ORDERS_ROUTE} from "@/utils/consts";
 import Link from "next/link";
 import {IOrder, orderStatuses, orderTypes} from "@/models/IOrder";
-import {convertPostgresDate} from "../../../helpers/convertPostgresDate";
+import {convertPostgresDateToNormalDate} from "../../../helpers/date/convertPostgresDateToNormalDate";
 import {IUser} from "@/models/IUser";
 
 
@@ -28,7 +28,7 @@ const OrderDetailInfo: FC<OrderDetailInfoProps> = ({order}) => {
             <div className={style.head}>
                 <div className={style.info}>
                     <span>Дата заявки:</span>
-                    {convertPostgresDate(String(order?.requestDate))}
+                    {convertPostgresDateToNormalDate(String(order?.requestDate))}
                 </div>
 
                 {order?.status === orderStatuses.PAID && <div className={`${style.status} ${style.status_active}`}>Оплачено</div>}
@@ -45,7 +45,7 @@ const OrderDetailInfo: FC<OrderDetailInfoProps> = ({order}) => {
 
                 <div className={style.info}>
                     <span>Дата планируемой доставки:</span>
-                    {convertPostgresDate(String(order?.deliveryDate))}
+                    {convertPostgresDateToNormalDate(String(order?.deliveryDate))}
                 </div>
             </div>
 

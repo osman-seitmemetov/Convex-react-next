@@ -15,7 +15,7 @@ export interface IUser {
     email: string,
     isActivated: boolean,
     id: number,
-    bornDate: Date,
+    bornDate: string,
     gender: genderTypes,
     phone: string,
     role?: string

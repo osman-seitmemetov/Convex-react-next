@@ -14,13 +14,14 @@ export const instance = axios.create({
     baseURL: API_URL,
     headers: {
         'Content-Type': 'application/json'
-    }
+    },
+    withCredentials: true
 });
 
 instance.interceptors.request.use((config) => {
     const accessToken = localStorage.getItem('token');
 
-    if(config.headers && accessToken) {
+    if(config.headers && localStorage.getItem('token')) {
         config.headers.Authorization = `Bearer ${accessToken}`;
     }
     return config;

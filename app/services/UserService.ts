@@ -1,15 +1,28 @@
-import $api from "../http";
-import axios, {AxiosResponse} from "axios";
-import {LoginResponse} from "@/models/response/LoginResponse";
-import {IUser} from "@/models/IUser";
+import {genderTypes, IUser} from "@/models/IUser";
+import {instance} from "../api/interceptots";
+import axios from "axios";
+
+export interface IEditData {
+    name?: string,
+    lastName?: string,
+    email?: string,
+    isActivated?: boolean,
+    bornDate?: string,
+    gender?: genderTypes,
+    phone?: string,
+    password?: string
+}
 
 export const UserService = {
     async getAll() {
-        return await axios.get<IUser[]>('http://localhost:5000/api/user/users');
+        return await axios.get<IUser[]>('http://localhost:5000/api/user/users', {withCredentials: true});
     },
 
     async getById(id: string) {
-        console.log(id)
-        return await axios.get<IUser>(`http://localhost:5000/api/user/${id}`);
+        return await axios.get<IUser>(`http://localhost:5000/api/user/${id}`, {withCredentials: true});
+    },
+
+    async editProfile(editData: IEditData) {
+        return await instance.put<IUser>(`/user/edit`, editData);
     }
 }

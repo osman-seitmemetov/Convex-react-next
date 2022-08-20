@@ -36,7 +36,7 @@ const AdminUser: FC<{user: IUser}> = ({user}) => {
 
                         <div className={styles.field}>
                             Дата рождения:&nbsp;
-                            <span>{user.bornDate}</span>
+                            <span>{String(user.bornDate)}</span>
                         </div>
 
                         <div className={styles.field}>

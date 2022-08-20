@@ -1,6 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {IUser} from "@/models/IUser";
-import {checkAuth, login, logout, registration} from "@/store/auth/AuthActionCreators";
+import {checkAuth, editProfile, login, logout, registration} from "@/store/auth/AuthActionCreators";
 
 
 interface authState {
@@ -57,6 +57,9 @@ export const authSlice = createSlice({
         }).addCase(checkAuth.rejected, state => {
             state.isLoading = false;
             state.user = null;
+        }).addCase(editProfile.fulfilled, (state, {payload}) => {
+            state.isLoading = false;
+            state.user = payload;
         })
     }
 })

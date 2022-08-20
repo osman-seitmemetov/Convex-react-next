@@ -1,8 +1,6 @@
-import {configureStore, combineReducers} from "@reduxjs/toolkit";
+import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import authReducer from "./auth/AuthSlice";
-import orderReducer from "./orders/OrderReducer";
 import notificationsReducer from "./notifications/NotificationsSlice";
-import promocodesReducer from "./promocodes/PromocodesSlice";
 import articlesReducer from "./articles/ArticlesSlice";
 import bannersReducer from "./banners/BannersSlice";
 import FAQReducer from "./FAQ/FAQSlice";
@@ -10,9 +8,7 @@ import FAQReducer from "./FAQ/FAQSlice";
 
 const rootReducer = combineReducers({
     authReducer,
-    orderReducer,
     notificationsReducer,
-    promocodesReducer,
     articlesReducer,
     bannersReducer,
     FAQReducer

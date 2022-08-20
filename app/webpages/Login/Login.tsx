@@ -1,7 +1,7 @@
 import {FC} from "react";
 import Input from "@/components/UI/InputGroup/Input/Input";
 import ButtonGreen from "@/components/UI/buttons/ButtonGreen/ButtonGreen";
-import InputGroup from "@/ui/InputGroup/InputGroup";
+import InputGroup from "@/components/UI/InputGroup/InputGroup";
 import Checkbox from "@/components/Checkbox/Checkbox";
 import ButtonTransparent from "@/components/UI/buttons/ButtonTransparent/ButtonTransparent";
 import Form from "@/components/Form/Form";
@@ -41,10 +41,8 @@ const Login: FC = () => {
     const {login} = useActions()
 
     const onSubmit: SubmitHandler<ILoginFields> = ({password, email}) => {
-        if(isSubmitSuccessful) {
-            login({email, password});
-            reset();
-        }
+        login({email, password});
+        reset();
     }
 
     return (

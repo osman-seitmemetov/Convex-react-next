@@ -1,12 +1,8 @@
-import {axiosClassic} from "../api/interceptots";
-import {IOrder} from "@/models/IOrder";
+import {instance} from "../api/interceptots";
+import {IPromocode} from "@/models/IPromocode";
 
-export const OrderService = {
+export const PromocodeService = {
     async getAll() {
-        return await axiosClassic.get<IOrder[]>('/order');
-    },
-
-    async getById(id: string) {
-        return await axiosClassic.get<IOrder>(`/order/${id}`);
+        return await instance.get<IPromocode[]>('/promocode');
     }
 }

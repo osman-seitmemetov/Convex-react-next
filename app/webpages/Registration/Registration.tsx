@@ -1,6 +1,6 @@
 import React, {FC, useState} from "react";
 import Input from "@/components/UI/InputGroup/Input/Input";
-import InputGroup from "@/ui/InputGroup/InputGroup";
+import InputGroup from "@/components/UI/InputGroup/InputGroup";
 import ButtonGreen from "@/components/UI/buttons/ButtonGreen/ButtonGreen";
 import ButtonTransparent from "@/components/UI/buttons/ButtonTransparent/ButtonTransparent";
 import Checkbox from "@/components/Checkbox/Checkbox";
@@ -23,11 +23,11 @@ import {useRouter} from "next/router";
 
 const options: IOption[] = [
     {
-        value: 'male',
+        value: 'MALE',
         label: 'Мужской'
     },
     {
-        value: 'female',
+        value: 'FEMALE',
         label: 'Женский'
     }
 ]
@@ -51,7 +51,7 @@ const Registration: FC = () => {
 
     const {
         register, handleSubmit,
-        formState: {errors, isSubmitSuccessful, },
+        formState: {errors, isSubmitSuccessful,},
         reset, resetField,
         control
     } = useForm<IRegistrationFields>({
@@ -66,21 +66,15 @@ const Registration: FC = () => {
             lastName, firstName,
             gender, email, password
         }) => {
-        if(isSubmitSuccessful) {
-            registration({
-                phone, bornDate,
-                lastName, name: firstName,
-                gender, email, password
-            } );
-            reset();
-        }
+        registration({
+            phone, bornDate, lastName, name: firstName, gender, email, password
+        });
+        reset();
     }
 
     const router = useRouter();
     const {user} = useAuth();
-    // if (user) router.push('/profile');
-
-    const [startDate, setStartDate] = useState<Date | null>(null);
+    if (user) router.push('/profile');
 
     return (
         <Auth title="Регистрация" isScrollable>
@@ -107,23 +101,24 @@ const Registration: FC = () => {
                 <InputGroup title="Дата рождения*">
                     <Controller
                         control={control}
-                        // defaultValue={undefined}
                         name="bornDate"
                         rules={{
                             required: "Это поле обязательно"
                         }}
                         render={({field}) =>
-                            <InputDate
-                                {...field}
-                                dateFormat="dd.MM.yyyy"
-                                placeholder="дд.мм.гггг"
-                                mask="11.11.1111"
-                                startDate={startDate}
-                                error={errors.bornDate?.message}
-                                onChange={(newValue: Date) => {
-                                    setStartDate(newValue);
-                                    return field.onChange(newValue);
-                                }}
+                            <Controller
+                                control={control}
+                                name='bornDate'
+                                render={({field}) => (
+                                    <InputDate
+                                        dateFormat="dd.MM.yyyy"
+                                        placeholder="дд.мм.гггг"
+                                        mask="11.11.1111"
+                                        selected={field.value}
+                                        onChange={(date: Date) => field.onChange(date)}
+                                        error={errors.bornDate?.message}
+                                    />
+                                )}
                             />
                         }
                     />

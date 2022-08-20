@@ -24,15 +24,19 @@ const NavLink: FC<NavLinkProps> = (
     const {asPath} = useRouter();
     let isActive = false;
 
-    if(exact) {
-        if(asPath === href) isActive = true;
+    if (exact) {
+        if (asPath === href) isActive = true;
     } else {
         isActive = isEqualStartPathNames(href, asPath);
     }
 
+    if (isActive) return (
+        <div style={{cursor: "pointer"}} className={`${className} ${activeClassName}`}>{children}</div>
+    );
+
     return (
         <Link href={href}>
-            <div style={{cursor: "pointer"}} className={`${className} ${isActive && activeClassName}`}>{children}</div>
+            <div style={{cursor: "pointer"}} className={className}>{children}</div>
         </Link>
     );
 }
