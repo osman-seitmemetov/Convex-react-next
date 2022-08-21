@@ -240,6 +240,7 @@ const Profile: FC = () => {
                         Сохранить
                     </ButtonTransparent>
                 }
+                {isSubmitSuccessful && <div>Аккаунт успешно редактирован</div>}
             </Form>
         </Account>
     );

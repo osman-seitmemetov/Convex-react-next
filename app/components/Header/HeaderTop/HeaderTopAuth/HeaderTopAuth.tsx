@@ -40,9 +40,9 @@ const HeaderTopAuth: FC<HeaderTopAuthProps> = ({user}) => {
                     className={style.dropdown}
                     onClick={(e) => {e.stopPropagation()}}
                 >
-                    <div className={style.head}>
-                        <div className={style.balance}>Ваш баланс: 140 000тг</div>
-                    </div>
+                    {/*<div className={style.head}>*/}
+                    {/*    <div className={style.balance}>Ваш баланс: 140 000тг</div>*/}
+                    {/*</div>*/}
 
                     <div className={style.menu}>
                         <NavLink href="/profile" className={style.link} activeClassName={style.link_active}>

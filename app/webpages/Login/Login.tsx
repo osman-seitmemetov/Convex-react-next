@@ -14,9 +14,11 @@ import {Controller, SubmitHandler, useForm} from "react-hook-form";
 import {useRouter} from "next/router";
 import {useActions} from "@/hooks/useActions";
 import {useAuth} from "@/hooks/useAuth";
+import {useAuthRedirect} from "@/hooks/useAuthRedirect";
 
 
 const Login: FC = () => {
+    useAuthRedirect();
     const router = useRouter();
     const {user} = useAuth();
     if (user) router.push('/profile');

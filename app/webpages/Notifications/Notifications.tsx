@@ -1,23 +1,24 @@
 import { FC } from "react";
 import style from './Notifications.module.scss';
 import NotificationsItem from "./NotificationsItem/NotificationsItem";
-import Account from "../../components/Account/Account";
-import {useAppSelector} from "../../hooks/redux";
-import AccountEmpty from "../../components/Account/AccountEmpty/AccountEmpty";
-import PictureNotificationsEmpty from "../../components/pictures/PictureNotificationsEmpty";
-import {ITabItem} from "../Promocodes/Promocodes";
-import AccountTabs from "../../components/Account/AccountTabs/AccountTabs";
-import AccountItems from "../../components/Account/AccountItems/AccountItems";
+import Account from "@/components/Account/Account";
+import {useAppSelector} from "@/hooks/redux";
+import AccountEmpty from "@/components/Account/AccountEmpty/AccountEmpty";
+import PictureNotificationsEmpty from "@/components/pictures/PictureNotificationsEmpty";
+import {ITabItem} from "@/webpages/Promocodes/Promocodes";
+import AccountTabs from "@/components/Account/AccountTabs/AccountTabs";
+import AccountItems from "@/components/Account/AccountItems/AccountItems";
+import {useNotifications} from "@/webpages/Notifications/useNotifications";
 
 const Notifications: FC = () => {
-    const {notifications} = useAppSelector(state => state.notificationsReducer);
+    const {notifications, isLoading} = useNotifications()
 
     const tabItems: ITabItem[] = [
         {
             title: 'Новые уведомления',
-            content: notifications.length > 0
+            content: notifications && notifications.data.filter(notification => !notification.read).length > 0
                 ? <AccountItems>
-                    {notifications.filter(notification => notification.read === false).map(notification =>
+                    {notifications.data.filter(notification => !notification.read).map(notification =>
                         <NotificationsItem key={notification.id} notification={notification}/>
                     )}
                 </AccountItems>
@@ -27,9 +28,9 @@ const Notifications: FC = () => {
         },
         {
             title: 'Прочитанные уведомления',
-            content: notifications.length > 0
+            content: notifications && notifications.data.filter(notification => notification.read).length > 0
                 ? <AccountItems>
-                    {notifications.filter(notification => notification.read === true).map(notification =>
+                    {notifications.data.filter(notification => notification.read).map(notification =>
                         <NotificationsItem key={notification.id} notification={notification}/>
                     )}
                 </AccountItems>

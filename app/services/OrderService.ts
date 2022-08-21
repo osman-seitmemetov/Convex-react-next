@@ -1,12 +1,12 @@
-import {axiosClassic} from "../api/interceptots";
+import {instance} from "../api/interceptots";
 import {IOrder} from "@/models/IOrder";
 
 export const OrderService = {
     async getAll() {
-        return await axiosClassic.get<IOrder[]>('/order');
+        return await instance.get<IOrder[]>('/order');
     },
 
     async getById(id: string) {
-        return await axiosClassic.get<IOrder>(`/order/${id}`);
+        return await instance.get<IOrder>(`/order/${id}`);
     }
 }
