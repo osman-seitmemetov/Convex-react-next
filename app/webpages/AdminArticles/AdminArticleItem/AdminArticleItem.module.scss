@@ -5,13 +5,41 @@
     display: flex;
     justify-content: space-between;
     border-radius: 10px;
-    background-color: var(--color-gallery-or-tundora);
+    background-color: var(--color-white-lilac-or-tundora);
+    align-items: center;
+    cursor: pointer;
 }
 
 .left {
     display: flex;
+    align-items: center;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: 700;
 }
 
 .right {
     display: flex;
+}
+
+.date {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: right;
+    color: var(--color-wistful-or-dove-gray);
+    font-size: 14px;
+    font-weight: 700;
+
+    span {
+        color: var(--color-wistful-or-dove-gray);
+        font-size: 14px;
+    }
+}
+
+.img {
+    border-radius: 5px;
+    margin-right: 10px;
 }

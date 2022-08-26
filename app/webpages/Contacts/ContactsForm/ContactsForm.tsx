@@ -1,16 +1,14 @@
-import React, {ChangeEvent, FC, useState} from "react";
+import React, {FC, useState} from "react";
 import style from './ContactsForm.module.scss';
 import Input from "@/components/UI/InputGroup/Input/Input";
 import ButtonGreen from "@/components/UI/buttons/ButtonGreen/ButtonGreen";
-import InputGroup from "@/ui/InputGroup/InputGroup";
+import InputGroup from "@/UI/InputGroup/InputGroup";
 import Textarea from "@/components/UI/InputGroup/Textarea/Textarea";
 import Form from "@/components/Form/Form";
-import AddFile from "@/components/UI/InputGroup/AddFile/AddFile";
 import ButtonReset from "@/components/UI/buttons/ButtonReset/ButtonReset";
 import ButtonGroup from "@/components/UI/buttons/ButtonGroup/ButtonGroup";
 import Recaptcha from "@/components/Recaptcha/Recaptcha";
 import {Controller, SubmitHandler, useForm} from "react-hook-form";
-import MaskedInput from "react-maskedinput";
 import InputTel from "@/components/UI/InputGroup/InputTel/InputTel";
 
 

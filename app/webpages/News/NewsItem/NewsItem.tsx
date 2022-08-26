@@ -4,6 +4,7 @@ import {NEWS_ROUTE} from "@/utils/consts";
 import {IArticle} from "@/models/IArticle";
 import Link from "next/link";
 import Image from "next/image";
+import {convertPostgresDateToNormalDate} from "../../../helpers/date/convertPostgresDateToNormalDate";
 
 interface INewsItem {
     article: IArticle
@@ -13,7 +14,7 @@ const NewsItem: FC<INewsItem> = ({article}) => {
     return (
         <article className={style.item}>
             <Image
-                src={article.previewImg}
+                src={`http://localhost:5000/${article.previewImg}`}
                 alt={article.title}
                 className={style.item__img}
                 width={250}
@@ -21,7 +22,7 @@ const NewsItem: FC<INewsItem> = ({article}) => {
             />
 
             <div className={style.item__right}>
-                <Link href={`${NEWS_ROUTE}/1`}>
+                <Link href={`${NEWS_ROUTE}/${article.id}`}>
                     <h3 className={style.item__title}>
                         {article.title}
                     </h3>
@@ -30,7 +31,7 @@ const NewsItem: FC<INewsItem> = ({article}) => {
                 <div className={style.item__bottom}>
                     <div className={style.item__date}>
                         <span>Дата публикации:</span>
-                        {article.date}
+                        {convertPostgresDateToNormalDate(article.date)}
                     </div>
 
                     <Link href={`${NEWS_ROUTE}/1`}>

@@ -1,6 +1,6 @@
-import { FC } from "react";
+import {FC} from "react";
 import styles from './AdminUsers.module.scss';
-import Admin from "@/webpages/Admin/Admin";
+import Admin from "@/components/Admin/Admin";
 import {useUsers} from "@/webpages/AdminUsers/useUsers";
 import AdminUsersItem from "@/webpages/AdminUsers/AdminUsersItem/AdminUsersItem";
 
@@ -14,8 +14,8 @@ const AdminUsers: FC = () => {
                     ? <div>loading...</div>
                     : <div className={styles.users}>
                         {
-                            users?.data?.map(user => (
-                                <AdminUsersItem key={user.id} user={user} />
+                            Array.isArray(users?.data) && users?.data.map(user => (
+                                <AdminUsersItem key={user.id} user={user}/>
                             ))
                         }
                     </div>

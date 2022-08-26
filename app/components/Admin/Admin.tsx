@@ -1,7 +1,7 @@
 import {FC, ReactNode} from "react";
 import styles from './Admin.module.scss';
-import Container from "@/components/Container/Container";
-import AdminSidebar from "@/webpages/../../components/Admin/AdminSidebar/AdminSidebar";
+import AdminSidebar from "./AdminSidebar/AdminSidebar";
+import AdminHeader from "@/components/Admin/AdminHeader/AdminHeader";
 
 
 interface AdminProps {
@@ -12,14 +12,14 @@ interface AdminProps {
 const Admin: FC<AdminProps> = ({children, title}) => {
     return (
         <section className={styles.admin}>
-            {/*<Container className={styles.container}>*/}
-                <h1 className={styles.title}>Панель администратора {title}</h1>
-
+            <AdminHeader />
+            <div style={{display: "flex", padding: "0 15px"}}>
+                <AdminSidebar />
                 <div className={styles.content}>
-                    <AdminSidebar />
+                    <h1 className={styles.title}>Панель администратора {title}</h1>
                     {children}
                 </div>
-            {/*</Container>*/}
+            </div>
         </section>
     );
 }

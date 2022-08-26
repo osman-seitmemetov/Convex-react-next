@@ -1,19 +1,33 @@
 import React, {FC} from "react";
 import Admin from "@/components/Admin/Admin";
-import {useForm, Controller} from "react-hook-form";
+import {useForm, Controller, SubmitHandler} from "react-hook-form";
 import Form from "@/components/Form/Form";
 import {stripHtml} from "string-strip-html";
 import dynamic from "next/dynamic";
+import {useArticle} from "@/webpages/AdminArticle/useArticle";
+import {useRouter} from "next/router";
+import InputGroup from "@/UI/InputGroup/InputGroup";
+import InputTel from "@/UI/InputGroup/InputTel/InputTel";
+import Input from "@/UI/InputGroup/Input/Input";
+import {ArticleService} from "@/services/ArticleService";
+import {useArticleEdit} from "@/webpages/AdminArticle/useArticleEdit";
+import ImageUploader from "@/UI/InputGroup/ImageUploader/ImageUploader";
+import ButtonGreen from "@/UI/buttons/ButtonGreen/ButtonGreen";
 
 const DynamicTextEditor = dynamic(() => import('@/UI/InputGroup/TextEditor/TextEditor'), {
     ssr: false
 })
 
+export interface IArticleFields {
+    title: string
+    text: string,
+    previewImg: string,
+    bannerImg: string
+}
 
-const AdminUser: FC = () => {
-    interface IArticleFields {
-        text: string,
-    }
+const AdminArticle: FC = () => {
+    const {query} = useRouter();
+    const {article} = useArticle(String(query.id));
 
     const {
         register,
@@ -22,42 +36,102 @@ const AdminUser: FC = () => {
         reset,
         resetField,
         control,
+        setValue
     } = useForm<IArticleFields>({
         mode: "onChange"
     });
 
-    const text = `<b>Convex – это специализированный электронный магазин по доставке продуктов питания и товаров первой необходимости в Исправительные Колонии и Следственные Изоляторы РК.</b> В электронном магазине представлены товары, включенные в перечень вещей и предметов, разрешенных для передачи лицам, находящимся в СИЗО и Исправительных Колониях.
-    <br />
-    <br />
-        
-    <b>В электронном магазине Convex можно:</b> <br />1. Пополнив собственный баланс, отправить подследственному в СИЗО сформированный вами заказ. <br />2. Перевести денежные средства на баланс подследственному или оужденному находящемуся в СИЗО или в Исправительных коланиях, для самостоятельного оформления заказа через Терминал установленного внутри учреждения.
-    `
+    const {onSubmit, isLoading} = useArticleEdit(setValue);
 
     return (
-        <Admin title={` > Статьи > `}>
-            <Form style={{maxWidth: '100%'}}>
-                <Controller
-                    control={control}
-                    name="text"
-                    defaultValue={text}
-                    rules={{
-                        validate: {
-                            required: (v) => (v && stripHtml(v).result.length > 0) || 'Это поле обязательно'
+        <Admin title={` > Статьи > ${article?.title}`}>
+            <Form onSubmit={handleSubmit(onSubmit)} style={{maxWidth: '100%'}}>
+                <InputGroup title="Заголовок">
+                    <Controller
+                        control={control}
+                        defaultValue=""
+                        name="title"
+                        rules={{
+                            required: "Это поле обязательно"
+                        }}
+                        render={({field, fieldState: {error}}) =>
+                            <Input
+                                placeholder="Введите заголовок"
+                                type="text"
+                                inputMode="text"
+                                error={error}
+                                {...field}
+                            />
                         }
-                    }}
-                    render={({field: {value, onChange}, formState: {errors}}) =>
-                        <DynamicTextEditor
-                            onChange={onChange}
-                            value={value}
-                            error={errors}
-                            placeholder="Текст статьи"
+                    />
+                </InputGroup>
+
+                <InputGroup title="Текст">
+                    <Controller
+                        control={control}
+                        name="text"
+                        defaultValue=""
+                        rules={{
+                            validate: {
+                                required: (v) => (v && stripHtml(v).result.length > 0) || 'Это поле обязательно'
+                            }
+                        }}
+                        render={({field: {value, onChange}, fieldState: {error}}) =>
+                            <DynamicTextEditor
+                                onChange={onChange}
+                                value={value}
+                                error={error}
+                                placeholder="Текст статьи"
+                            />
+                        }
+                    />
+                </InputGroup>
+
+                <div style={{display: "grid", gridTemplateColumns: 'repeat(2, 1fr)', gridColumnGap: 20}}>
+                    <InputGroup title="Превью" style={{maxWidth: '50%'}}>
+                        <Controller
+                            control={control}
+                            defaultValue=""
+                            name="previewImg"
+                            rules={{
+                                required: "Это поле обязательно"
+                            }}
+                            render={({field: {onChange, value}, fieldState: {error}}) =>
+                                <ImageUploader
+                                    onChange={onChange}
+                                    value={value}
+                                    error={error}
+                                    placeholder="Превью"
+                                />
+                            }
                         />
-                    }
-                />
+                    </InputGroup>
+
+                    <InputGroup title="Баннер" style={{maxWidth: '50%'}}>
+                        <Controller
+                            control={control}
+                            defaultValue=""
+                            name="bannerImg"
+                            rules={{
+                                required: "Это поле обязательно"
+                            }}
+                            render={({field: {onChange, value}, fieldState: {error}}) =>
+                                <ImageUploader
+                                    onChange={onChange}
+                                    value={value}
+                                    error={error}
+                                    placeholder="banner"
+                                />
+                            }
+                        />
+                    </InputGroup>
+                </div>
+
+                <ButtonGreen>Сохранить</ButtonGreen>
             </Form>
         </Admin>
     );
 }
 
-export default AdminUser;
+export default AdminArticle;
 

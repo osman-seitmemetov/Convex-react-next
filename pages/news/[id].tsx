@@ -8,7 +8,7 @@ const ArticlePage: NextPage = () => {
         <>
             <Header type={headerTypes.withoutBottom}/>
             <div className="main">
-                <Article />
+                <Article/>
             </div>
             <Footer/>
         </>

@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['http://localhost:5000']
+    domains: ['localhost']
   },
   reactStrictMode: true,
   swcMinify: true,

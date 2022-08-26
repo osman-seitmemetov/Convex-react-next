@@ -1,4 +1,3 @@
-import {Dispatch, SetStateAction} from "react";
 import {IProduct} from "@/models/IProduct";
 import {genderTypes} from "@/models/IUser";
 

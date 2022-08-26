@@ -2,9 +2,9 @@ import {FC} from "react";
 import style from './AdminSidebar.module.scss';
 import NavLink from "@/components/NavLink/NavLink";
 
-const AccountSidebar: FC = () => {
+const AdminSidebar: FC = () => {
     return (
-        <aside className={style.accountSidebar}>
+        <aside className={style.sidebar}>
             <nav className={style.nav}>
                 <NavLink exact href="/admin" className={style.nav__link} activeClassName={style.nav__link_active}>
                     Главная
@@ -33,7 +33,7 @@ const AccountSidebar: FC = () => {
                     </svg>
                 </NavLink>
 
-                <NavLink exact href="/admin/categories" className={style.nav__link} activeClassName={style.nav__link_active}>
+                <NavLink href="/admin/categories" className={style.nav__link} activeClassName={style.nav__link_active}>
                     Категории
 
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -48,7 +48,7 @@ const AccountSidebar: FC = () => {
                     </svg>
                 </NavLink>
 
-                <NavLink exact href="/admin/notifications" className={style.nav__link} activeClassName={style.nav__link_active}>
+                <NavLink href="/admin/notifications" className={style.nav__link} activeClassName={style.nav__link_active}>
                     Уведомления
 
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -57,7 +57,7 @@ const AccountSidebar: FC = () => {
                     </svg>
                 </NavLink>
 
-                <NavLink exact href="/admin/orders" className={style.nav__link} activeClassName={style.nav__link_active}>
+                <NavLink href="/admin/orders" className={style.nav__link} activeClassName={style.nav__link_active}>
                     Заказы
 
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -66,7 +66,7 @@ const AccountSidebar: FC = () => {
                     </svg>
                 </NavLink>
 
-                <NavLink exact href="/admin/promocodes" className={style.nav__link} activeClassName={style.nav__link_active}>
+                <NavLink href="/admin/promocodes" className={style.nav__link} activeClassName={style.nav__link_active}>
                     Промокоды
 
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -75,7 +75,7 @@ const AccountSidebar: FC = () => {
                     </svg>
                 </NavLink>
 
-                <NavLink exact href="/admin/articles" className={style.nav__link} activeClassName={style.nav__link_active}>
+                <NavLink href="/admin/articles" className={style.nav__link} activeClassName={style.nav__link_active}>
                     Новости
 
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -84,7 +84,7 @@ const AccountSidebar: FC = () => {
                     </svg>
                 </NavLink>
 
-                <NavLink exact href="/admin/banners" className={style.nav__link} activeClassName={style.nav__link_active}>
+                <NavLink href="/admin/banners" className={style.nav__link} activeClassName={style.nav__link_active}>
                     Баннеры
 
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -93,7 +93,7 @@ const AccountSidebar: FC = () => {
                     </svg>
                 </NavLink>
 
-                <NavLink exact href="/admin/faq" className={style.nav__link} activeClassName={style.nav__link_active}>
+                <NavLink href="/admin/faq" className={style.nav__link} activeClassName={style.nav__link_active}>
                     Вопрос-ответ
 
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -106,4 +106,4 @@ const AccountSidebar: FC = () => {
     );
 }
 
-export default AccountSidebar;
+export default AdminSidebar;

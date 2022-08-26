@@ -15,11 +15,11 @@ export interface IEditData {
 
 export const UserService = {
     async getAll() {
-        return await axios.get<IUser[]>('http://localhost:5000/api/user/users', {withCredentials: true});
+        return await instance.get<IUser[]>('http://localhost:5000/api/user/users', {withCredentials: true});
     },
 
     async getById(id: string) {
-        return await axios.get<IUser>(`http://localhost:5000/api/user/${id}`, {withCredentials: true});
+        return await instance.get<IUser>(`http://localhost:5000/api/user/${id}`, {withCredentials: true});
     },
 
     async editProfile(editData: IEditData) {

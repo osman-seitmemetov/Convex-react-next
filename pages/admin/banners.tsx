@@ -4,12 +4,9 @@ import {NextPageAuth} from "@/types/authProvider";
 
 const AdminBannersPage: NextPageAuth = () => {
     return (
-        <>
-            <Header type={headerTypes.auth} />
-            <div className="main">
-                <AdminBanners />
-            </div>
-        </>
+        <div className="main">
+            <AdminBanners/>
+        </div>
     )
 }
 

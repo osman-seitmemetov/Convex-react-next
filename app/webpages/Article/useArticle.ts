@@ -8,7 +8,7 @@ export const useArticle = (id: string) => {
         data,
         error,
         status
-    } = useQuery('all products', () => ArticleService.getById(id), {
+    } = useQuery('all products', () => ArticleService.getByIdPublic(id), {
         onSuccess: ({data}) => {
 
         },

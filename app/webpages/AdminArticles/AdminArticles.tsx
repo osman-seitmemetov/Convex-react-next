@@ -1,15 +1,12 @@
 import React, {FC, useState} from "react";
 import Admin from "@/components/Admin/Admin";
-import {useForm, Controller, SubmitHandler} from "react-hook-form";
+import {SubmitHandler, useForm} from "react-hook-form";
 import Form from "@/components/Form/Form";
-import {stripHtml} from "string-strip-html";
 import dynamic from "next/dynamic";
-import ButtonTransparent from "@/UI/buttons/ButtonTransparent/ButtonTransparent";
 import ButtonGreen from "@/UI/buttons/ButtonGreen/ButtonGreen";
-import styles from "@/webpages/AdminBanners/AdminBanners.module.scss";
+import styles from "./AdminArticles.module.scss";
 import Modal from "@/UI/modals/Modal/Modal";
-import {useBanners} from "@/webpages/AdminBanners/useBanners";
-import {useArticles} from "@/webpages/Article/useArticles";
+import {useArticles} from "@/webpages/AdminArticles/useArticles";
 import AdminArticleItem from "@/webpages/AdminArticles/AdminArticleItem/AdminArticleItem";
 
 const DynamicTextEditor = dynamic(() => import('@/UI/InputGroup/TextEditor/TextEditor'), {

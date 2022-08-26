@@ -8,47 +8,19 @@ import {NextPageAuth} from "@/types/authProvider";
 import {useRouter} from "next/router";
 
 
-const AdminUserPage: NextPageAuth<{user: IUser}> = ({user}) => {
+const AdminUserPage: NextPageAuth = () => {
     const router = useRouter();
     if (router.isFallback) {
         return <div>Loading...</div>
     }
 
     return (
-        <>
-            <Header type={headerTypes.auth} />
-            <div className="main">
-                <AdminUser user={user} />
-            </div>
-        </>
+        <div className="main">
+            <AdminUser />
+        </div>
     )
 }
 
 AdminUserPage.isOnlyAdmin = true;
+
 export default AdminUserPage;
-
-export const getStaticProps: GetStaticProps = async ({params}) => {
-
-    const {data: user} = await UserService.getById(String(params?.id));
-    console.log(user)
-
-    return {
-        props: {user: user}
-    }
-}
-
-export const getStaticPaths: GetStaticPaths = async () => {
-    try {
-        const { data: users } = await UserService.getAll();
-        const paths = users.map(({id}) => ({
-            params: { id: id.toString() },
-        }))
-
-        return { paths, fallback: 'blocking' };
-    } catch {
-        return {
-            paths: [],
-            fallback: false,
-        }
-    }
-}

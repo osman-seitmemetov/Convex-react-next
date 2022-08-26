@@ -12,7 +12,7 @@ const Input: FC<InputProps> = ({error, className, ...rest}) => {
                 className={`${style.input} ${error && style.input_error} ${className}`}
                 {...rest}
             />
-            {error && <div className={style.errorLog}>{error}</div>}
+            {error && <div className={style.errorLog}>{error.message}</div>}
         </>
     );
 }

@@ -2,8 +2,7 @@ import {FC} from "react";
 import style from './FAQ.module.scss';
 import FAQItem from "./FAQItem/FAQItem";
 import Container from "@/components/Container/Container";
-import ButtonGreen from "@/components/UI/buttons/ButtonGreen/ButtonGreen";
-import {buttonTypes} from "@/components/UI/buttons/ButtonGreen/ButtonGreenEnums";
+import ButtonGreen from "@/UI/buttons/ButtonGreen/ButtonGreen";
 import {IFAQItem} from "@/types/types";
 import {FAQ_ROUTE} from "@/utils/consts";
 import NavLink from "@/components/NavLink/NavLink";
@@ -132,7 +131,7 @@ const FAQ: FC = () => {
                         Вопросы по работе с сайтом
                     </NavLink>
 
-                    <ButtonGreen type={buttonTypes.button} className={style.sidebar__btn}>Задать вопрос</ButtonGreen>
+                    <ButtonGreen type="button" className={style.sidebar__btn}>Задать вопрос</ButtonGreen>
                 </aside>
 
                 <div className={style.accordeons}>

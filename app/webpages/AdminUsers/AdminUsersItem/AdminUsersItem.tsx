@@ -1,6 +1,6 @@
 import { FC } from "react";
 import styles from './AdminUsersItem.module.scss';
-import Admin from "@/webpages/Admin/Admin";
+import Admin from "@/components/Admin/Admin";
 import {useUsers} from "@/webpages/AdminUsers/useUsers";
 import {IUser} from "@/models/IUser";
 import Link from "next/link";

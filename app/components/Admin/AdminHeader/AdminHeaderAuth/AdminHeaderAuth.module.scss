@@ -1,4 +1,4 @@
-@import "../../../../../assets/scss/mixins/breakpoint";
+@import "../../../../assets/scss/mixins/breakpoint";
 
 
 .auth {
@@ -130,14 +130,8 @@
     line-height: 100%;
     border: none;
     background: none;
-    overflow: hidden;
-    min-width: max-content;
 
     span {
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        max-width: 10vw;
     }
 
     &__arrow {

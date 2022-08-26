@@ -4,12 +4,9 @@ import {NextPageAuth} from "@/types/authProvider";
 
 const AdminUsersPage: NextPageAuth = () => {
     return (
-        <>
-            <Header type={headerTypes.auth} />
-            <div className="main">
-                <AdminUsers />
-            </div>
-        </>
+        <div className="main">
+            <AdminUsers/>
+        </div>
     )
 }
 AdminUsersPage.isOnlyAdmin = true;

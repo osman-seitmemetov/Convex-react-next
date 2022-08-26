@@ -2,13 +2,13 @@ import {useQuery} from "react-query";
 import {BannerService} from "@/services/BannerService";
 import {ArticleService} from "@/services/ArticleService";
 
-export const useArticles = () => {
+export const useArticle = (id: string) => {
     const {
         isLoading,
-        data: articles,
+        data,
         error,
         status
-    } = useQuery('all products', () => ArticleService.getAll(), {
+    } = useQuery('all products', () => ArticleService.getById(id), {
         onSuccess: ({data}) => {
 
         },
@@ -16,6 +16,8 @@ export const useArticles = () => {
             alert(error.message)
         },
     });
+    const article = data?.data;
+    console.log('hook', id)
 
-    return {isLoading, articles}
+    return {isLoading, article}
 }

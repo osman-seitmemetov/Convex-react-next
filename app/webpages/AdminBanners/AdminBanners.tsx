@@ -1,11 +1,10 @@
 import React, {FC, useState} from "react";
 import styles from './AdminBanners.module.scss';
-import Admin from "@/webpages/Admin/Admin";
+import Admin from "@/components/Admin/Admin";
 import {useBanners} from "@/webpages/AdminBanners/useBanners";
 import ButtonGreen from "@/components/UI/buttons/ButtonGreen/ButtonGreen";
 import Head from "next/head";
-// @ts-ignore
-import Modal from '@/ui/modals/Modal/Modal';
+import Modal from '@/components/UI/modals/Modal/Modal';
 import {Controller, SubmitHandler, useForm} from "react-hook-form";
 import Form from "@/components/Form/Form";
 import InputTel from "@/components/UI/InputGroup/InputTel/InputTel";
@@ -47,7 +46,7 @@ const AdminBanners: FC = () => {
                             <ButtonGreen onClick={() => setActive(true)}>Добавить новый баннер</ButtonGreen>
                             <div className={styles.banners}>
                                 {
-                                    banners?.data?.map(banner => (
+                                    Array.isArray(banners?.data) && banners?.data?.map(banner => (
                                         <div key={banner.id}>
                                             <img
                                                 className={styles.banner__img}

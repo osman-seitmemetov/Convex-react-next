@@ -1,4 +1,4 @@
-import React, {FC, ReactNode} from 'react';
+import React, {CSSProperties, FC, ReactNode} from 'react';
 import style from './InputGroup.module.scss';
 
 
@@ -7,7 +7,8 @@ interface IInput {
     disabled?: boolean,
     className?: string,
     name?: string,
-    children?: ReactNode
+    children?: ReactNode,
+    style?: CSSProperties
 }
 
 const InputGroup: FC<IInput> = ({ title, disabled, className, children, name}) => {

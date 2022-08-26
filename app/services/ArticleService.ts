@@ -1,13 +1,23 @@
-import axios from "axios";
-import {IBanner} from "@/models/IBanner";
+import {IArticle} from "@/models/IArticle";
+import {axiosClassic} from "../api/interceptots";
+import {IArticleFields} from "@/webpages/AdminArticle/AdminArticle";
 
-export const BannerService = {
+export const ArticleService = {
     async getAll() {
-        return await axios.get<IBanner[]>('http://localhost:5000/api/banner');
+        return await axiosClassic.get<IArticle[]>('http://localhost:5000/api/article', {});
     },
 
     async getById(id: string) {
-        console.log(id)
-        return await axios.get<IBanner>(`http://localhost:5000/api/banner/${id}`);
+        return await axiosClassic.get<IArticleFields>(`http://localhost:5000/api/article/${id}`);
+    },
+
+    async getByIdPublic(id: string) {
+        return await axiosClassic.get<IArticle>(`http://localhost:5000/api/article/${id}`);
+    },
+
+    async edit(id: string, data: IArticleFields) {
+        return await axiosClassic.put<IArticle>(`http://localhost:5000/api/article/${id}`, data, {
+            headers: {'Content-Type': 'multipart/form-data'}
+        });
     }
 }

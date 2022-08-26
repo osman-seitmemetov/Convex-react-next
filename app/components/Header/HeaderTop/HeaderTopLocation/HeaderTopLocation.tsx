@@ -2,8 +2,7 @@ import {FC, useState} from "react";
 import LocationIcon from "@/assets/img/location-icon.svg";
 import styles from "./HeaderTopLocation.module.scss";
 import Image from "next/image";
-// @ts-ignore
-import LocationModal from "@/ui/modals/LocationModal/LocationModal";
+import LocationModal from "@/UI/modals/LocationModal/LocationModal";
 
 
 interface HeaderTopLocationProps {}
