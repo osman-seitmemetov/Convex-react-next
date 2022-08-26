@@ -1,0 +1,17 @@
+@import "../../../assets/scss/mixins/breakpoint";
+
+.item {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 10px;
+    background-color: var(--color-gallery-or-tundora);
+}
+
+.left {
+    display: flex;
+}
+
+.right {
+    display: flex;
+}
