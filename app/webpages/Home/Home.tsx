@@ -58,16 +58,6 @@ const Home: FC = () => {
 
     return (
         <>
-            <Container>
-                <h1 style={{fontSize: 40, fontWeight: 700, padding: '100px 0'}}>
-                    Любой ценой ищи заказы. По верстке,
-                    по реакту, по чему угодно. Написать охуенный коверлеттер,
-                    и заранее делать часть задания.
-                    <br/>
-                    <br/>
-                    Мне недостаточно не навыков, а настойчивости
-                </h1>
-            </Container>
             {/*<Banner />*/}
             {/*<Propositions />*/}
             {/*<ProductSlider title="Акции" products={products}/>*/}
