@@ -1,6 +1,8 @@
 import { FC } from "react";
 import style from './FAQItem.module.scss';
 import {IFAQItem} from "@/types/types";
+import parse from 'html-react-parser';
+
 
 interface FAQItemProps {
     item: IFAQItem
@@ -18,7 +20,7 @@ const FAQItem: FC<FAQItemProps> = ({ item }) => {
             </summary>
 
             <div className={style.content}>
-                {item.text}
+                {parse(item.text)}
             </div>
         </details>
     );

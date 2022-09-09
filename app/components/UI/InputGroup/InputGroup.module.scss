@@ -1,5 +1,4 @@
 .input {
-    margin-bottom: 20px;
     //z-index: 5;
 
     &:last-child {
@@ -11,11 +10,16 @@
         font-weight: 700;
         font-size: 18px;
         line-height: 22px;
+        margin-bottom: 10px;
     }
 
     &_hidden {
         display: none;
     }
+}
+
+.autoMargin {
+    margin-bottom: 20px;
 }
 
 .input_disabled {

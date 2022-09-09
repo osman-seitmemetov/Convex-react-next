@@ -1,25 +1,24 @@
 import React, {CSSProperties, FC, ReactNode} from 'react';
-import style from './InputGroup.module.scss';
+import styles from './InputGroup.module.scss';
 
 
-interface IInput {
+interface InputGroupProps {
     title: string,
     disabled?: boolean,
     className?: string,
     name?: string,
     children?: ReactNode,
-    style?: CSSProperties
+    style?: CSSProperties,
+    autoMargin?: boolean
 }
 
-const InputGroup: FC<IInput> = ({ title, disabled, className, children, name}) => {
+const InputGroup: FC<InputGroupProps> = ({title, disabled, className, children, name, style, autoMargin}) => {
     return (
         <div
-            className={disabled
-                ? `${style.input} ${className} ${style.input_disabled}`
-                : `${style.input} ${className}`
-            }
+            className={`${styles.input} ${className} ${disabled && styles.input_disabled} ${autoMargin && styles.autoMargin}`}
+            style={style}
         >
-            <label className={style.input__title} htmlFor={name ? name : title}>{title}</label>
+            <label className={styles.input__title} htmlFor={name ? name : title}>{title}</label>
             {children}
         </div>
     );

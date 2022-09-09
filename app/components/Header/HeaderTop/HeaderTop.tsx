@@ -2,7 +2,7 @@ import {FC, useEffect, useState} from "react";
 import LogoImg from "@/assets/img/logo.png";
 import UserIcon from "@/assets/img/user-icon.svg";
 import HeaderTopAuth from "./HeaderTopAuth/HeaderTopAuth";
-import HeaderTopSearch from "./HeaderTopSearch/HeaderTopSearch";
+import InputSearch from "../../UI/InputSearch/InputSearch";
 import style from "./HeaderTop.module.scss";
 import Link from "next/link";
 import Image from "next/image";
@@ -110,7 +110,7 @@ const HeaderTop: FC<HeaderTopProps> = ({type}) => {
 
             {!isRender
                 && <div className={style.center}>
-                    <HeaderTopSearch/>
+                    <InputSearch/>
                 </div>
             }
 

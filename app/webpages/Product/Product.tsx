@@ -4,6 +4,7 @@ import ProductCheckboxGroup from "./ProductCheckboxGroup/ProductCheckboxGroup";
 import Container from "@/components/Container/Container";
 import ButtonGreen from "@/components/UI/buttons/ButtonGreen/ButtonGreen";
 import {IProduct} from "@/models/IProduct";
+import parse from "html-react-parser";
 
 
 interface ProductProps {
@@ -69,7 +70,7 @@ const Product: FC<ProductProps> = ({product, productsForSlider, isLoading}) => {
                                 : <ButtonGreen disabled className={style.desc__btn}>Нет в наличии</ButtonGreen>
                             }
 
-                            <div className={style.desc__text}>{product.description}</div>
+                            <div className={style.desc__text}>{parse(product.description)}</div>
                         </div>
                     </Container>
                 </section>

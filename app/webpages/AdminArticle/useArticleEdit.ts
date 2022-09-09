@@ -4,6 +4,8 @@ import {useRouter} from "next/router";
 import {useMutation, useQuery} from "react-query";
 import {ArticleService} from "@/services/ArticleService";
 import {getKeys} from "@/utils/object/getKeys";
+import {toastr} from "react-redux-toastr";
+import {toastError} from "@/utils/api/withToastrErrorRedux";
 
 export const useArticleEdit = (setValue: UseFormSetValue<IArticleFields>) => {
     const {push, query} = useRouter();
@@ -16,18 +18,17 @@ export const useArticleEdit = (setValue: UseFormSetValue<IArticleFields>) => {
             })
         },
         onError: (error) => {
-            alert(error);
+            toastError(error, 'Возникла ошибка при загрузке данных статьи');
         },
         enabled: !!query.id
     });
 
     const {mutateAsync} = useMutation('update article', (data: IArticleFields) => ArticleService.edit( articleId,data), {
         onError: (error) => {
-            alert(error);
+            toastError(error, 'Возникла ошибка при редактировании статьи');
         },
         onSuccess: ({data}) => {
-            alert('Статья успешно изменена');
-            alert(JSON.stringify(data));
+            toastr.success('Редактирование статьи', 'Статья успешно изменена')
             push('/admin/articles');
         }
     });

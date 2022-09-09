@@ -1,6 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {IUser} from "@/models/IUser";
 import {checkAuth, editProfile, login, logout, registration} from "@/store/auth/AuthActionCreators";
+import {getStoreLocal} from "@/utils/localStorage";
 
 
 interface authState {
@@ -9,28 +10,14 @@ interface authState {
 }
 
 const initialState: authState = {
-    user: null,
+    user: getStoreLocal('user'),
     isLoading: false
 }
 
 export const authSlice = createSlice({
-    name: 'auth',
+    name: 'user',
     initialState,
-    reducers: {
-        // login(state, action: PayloadAction<LoginResponse>) {
-        //     // state.isAuth = true;
-        //     state.user = action.payload.user;
-        //
-        //     console.log(state.user);
-        // },
-        // registration() {},
-        // logout() {},
-        // checkAuth(state, action: PayloadAction<LoginResponse>) {
-        //     localStorage.setItem('token', action.payload.accessToken);
-        //     // state.isAuth = true;
-        //     state.user = action.payload.user;
-        // }
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder.addCase(registration.pending, state => {
             state.isLoading = true;
@@ -52,11 +39,7 @@ export const authSlice = createSlice({
             state.isLoading = false;
             state.user = null
         }).addCase(checkAuth.fulfilled, (state, {payload}) => {
-            state.isLoading = false;
-            state.user = payload.user;
-        }).addCase(checkAuth.rejected, state => {
-            state.isLoading = false;
-            state.user = null;
+            if(localStorage.getItem('token') !== payload.accessToken) state.user = payload.user;
         }).addCase(editProfile.fulfilled, (state, {payload}) => {
             state.isLoading = false;
             state.user = payload;
@@ -64,4 +47,4 @@ export const authSlice = createSlice({
     }
 })
 
-export default authSlice.reducer;
+export const { reducer } = authSlice;

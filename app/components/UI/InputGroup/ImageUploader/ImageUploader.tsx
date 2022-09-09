@@ -23,7 +23,6 @@ const ImageUploader: FC<ImageUploaderProps> = ({onChange, placeholder, error, is
         onDropHandler
     } = useUpload(onChange);
 
-    console.log(value)
     return (
         <div>
             <input
@@ -35,7 +34,7 @@ const ImageUploader: FC<ImageUploaderProps> = ({onChange, placeholder, error, is
             {
                 drag
                     ? <label
-                        className={styles.dropArea}
+                        className={`${styles.dropArea} ${error && styles.dropArea_error}`}
                         htmlFor={placeholder}
                         onDragStart={e => dragStartHandler(e)}
                         onDragLeave={e => dragLeaveHandler(e)}
@@ -45,7 +44,7 @@ const ImageUploader: FC<ImageUploaderProps> = ({onChange, placeholder, error, is
                         Отпустите файл
                     </label>
                     : <label
-                        className={styles.dropArea}
+                        className={`${styles.dropArea} ${error && styles.dropArea_error}`}
                         htmlFor={placeholder}
                         onDragStart={e => dragStartHandler(e)}
                         onDragLeave={e => dragLeaveHandler(e)}
@@ -54,7 +53,7 @@ const ImageUploader: FC<ImageUploaderProps> = ({onChange, placeholder, error, is
                         Переместите или выберите файл для загрузки
                     </label>
             }
-            {error && <div>{error.message}</div>}
+            {error && <div className={styles.errorLog}>{error.message}</div>}
             {!isNoImage && <div>
                 {
                     isLoading

@@ -5,6 +5,7 @@ import Image from "next/image";
 import {useRouter} from "next/router";
 import {useArticle} from "./useArticle";
 import {convertPostgresDateToNormalDate} from "../../helpers/date/convertPostgresDateToNormalDate";
+import parse from "html-react-parser";
 
 const Article: FC = () => {
     const {query} = useRouter();
@@ -38,7 +39,7 @@ const Article: FC = () => {
                         </div>
 
                         <div className={style.text}>
-                            {article.text}
+                            {parse(article.text)}
                         </div>
                     </>
                 }

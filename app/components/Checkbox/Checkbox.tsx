@@ -1,28 +1,38 @@
-import React, {FC, InputHTMLAttributes} from 'react';
-import style from './Checkbox.module.scss';
+import React, {FC, forwardRef, InputHTMLAttributes} from 'react';
+import styles from './Checkbox.module.scss';
 
 
-interface ICheckbox extends InputHTMLAttributes<HTMLInputElement> {
+interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
     isSmall?: boolean,
 }
 
-const Checkbox: FC<ICheckbox> = ({className, isSmall, children, ...rest}) => {
+const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((
+    {
+        className,
+        isSmall,
+        style,
+        children,
+        ...rest
+    }, ref
+) => {
     return (
-        <label className={`${style.checkboxItem} ${className}`} htmlFor={`${children}`}>
+        <label style={style} className={`${styles.checkboxItem} ${className}`}>
             <input
-                className={style.checkboxItem__input}
-                id={`${children}`}
+                className={styles.checkboxItem__input}
                 type="checkbox"
+                ref={ref}
                 {...rest}
             />
-            <div className={style.checkbox}></div>
+            <div className={styles.checkbox}></div>
             <div
-                className={`${style.checkboxItem__title} ${isSmall && style.checkboxItem__title_form}`}
+                className={`${styles.checkboxItem__title} ${isSmall && styles.checkboxItem__title_form}`}
             >
                 {children}
             </div>
         </label>
     );
-}
+})
+
+Checkbox.displayName = 'Checkbox';
 
 export default Checkbox;

@@ -18,5 +18,5 @@ export const convertInputDateToPostgresDate = (date: Date) => {
     if(date.getMilliseconds() < 10) milliseconds = `00${date.getMilliseconds()}`;
     if(date.getMilliseconds() < 100 && date.getMilliseconds() > 10) milliseconds = `0${date.getMilliseconds()}`;
 
-    return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}.${milliseconds}`;
+    if(date) return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}.${milliseconds}`;
 }

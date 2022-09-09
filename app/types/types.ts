@@ -1,18 +1,6 @@
 import {IProduct} from "@/models/IProduct";
 import {genderTypes} from "@/models/IUser";
 
-
-export interface ISubcategory {
-    _id: number | string,
-    title: string,
-    categoryId: string | number
-}
-
-export interface ICategory {
-    _id: number | string,
-    title: string
-}
-
 export interface IFAQItem {
     _id: number
     title: string

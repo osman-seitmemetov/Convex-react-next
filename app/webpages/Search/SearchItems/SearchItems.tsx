@@ -7,7 +7,7 @@ import Title from "@/components/Title/Title";
 import Select, {SingleValue} from "react-select";
 import {IOption} from "@/models/IOption";
 import SearchItemsFilter from "./SearchItemsFilter/SearchItemsFilter";
-import SkeletonLoader from "@/components/SkeletonLoader/SkeletonLoader";
+import SkeletonLoader from "@/components/UI/SkeletonLoader/SkeletonLoader";
 import {IProduct} from "@/models/IProduct";
 
 

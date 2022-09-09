@@ -1,5 +1,5 @@
 import { FC } from "react";
-import Counter from '@/components/Counter/Counter';
+import Counter from '@/components/UI/Counter/Counter';
 import style from "./CartItem.module.scss";
 import {ICartItem} from "@/types/types";
 import {PRODUCT_ROUTE} from "@/utils/consts";

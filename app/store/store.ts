@@ -1,15 +1,17 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
-import authReducer from "./auth/AuthSlice";
+import { reducer as toastrReducer } from 'react-redux-toastr'
+import {reducer as UserReducer} from "./auth/AuthSlice";
 import notificationsReducer from "./notifications/NotificationsSlice";
 import bannersReducer from "./banners/BannersSlice";
 import FAQReducer from "./FAQ/FAQSlice";
 
 
 const rootReducer = combineReducers({
-    authReducer,
+    user: UserReducer,
     notificationsReducer,
     bannersReducer,
-    FAQReducer
+    FAQReducer,
+    toastr: toastrReducer,
 })
 
 export const store = configureStore({

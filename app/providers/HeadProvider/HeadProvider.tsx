@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import {FC, ReactNode} from 'react'
+import NextProgressBar from 'nextjs-progressbar'
 
 
 import Favicons from './Favicons'
@@ -7,6 +8,12 @@ import Favicons from './Favicons'
 const HeadProvider: FC<{children?: ReactNode}> = ({ children }) => {
 	return (
 		<>
+			<NextProgressBar
+				color="#46C578"
+				startPosition={0.3}
+				stopDelayMs={200}
+				height={3}
+			/>
 			<Head>
 				<meta charSet="UTF-8" />
 				<meta

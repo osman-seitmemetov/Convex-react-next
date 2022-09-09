@@ -13,6 +13,7 @@ import {ArticleService} from "@/services/ArticleService";
 import {useArticleEdit} from "@/webpages/AdminArticle/useArticleEdit";
 import ImageUploader from "@/UI/InputGroup/ImageUploader/ImageUploader";
 import ButtonGreen from "@/UI/buttons/ButtonGreen/ButtonGreen";
+import FieldsSection from "@/UI/FieldsSection/FieldsSection";
 
 const DynamicTextEditor = dynamic(() => import('@/UI/InputGroup/TextEditor/TextEditor'), {
     ssr: false
@@ -44,92 +45,86 @@ const AdminArticle: FC = () => {
     const {onSubmit, isLoading} = useArticleEdit(setValue);
 
     return (
-        <Admin title={` > Статьи > ${article?.title}`}>
-            <Form onSubmit={handleSubmit(onSubmit)} style={{maxWidth: '100%'}}>
-                <InputGroup title="Заголовок">
-                    <Controller
-                        control={control}
-                        defaultValue=""
-                        name="title"
-                        rules={{
-                            required: "Это поле обязательно"
-                        }}
-                        render={({field, fieldState: {error}}) =>
-                            <Input
-                                placeholder="Введите заголовок"
-                                type="text"
-                                inputMode="text"
-                                error={error}
-                                {...field}
-                            />
-                        }
-                    />
-                </InputGroup>
-
-                <InputGroup title="Текст">
-                    <Controller
-                        control={control}
-                        name="text"
-                        defaultValue=""
-                        rules={{
-                            validate: {
-                                required: (v) => (v && stripHtml(v).result.length > 0) || 'Это поле обязательно'
-                            }
-                        }}
-                        render={({field: {value, onChange}, fieldState: {error}}) =>
-                            <DynamicTextEditor
-                                onChange={onChange}
-                                value={value}
-                                error={error}
-                                placeholder="Текст статьи"
-                            />
-                        }
-                    />
-                </InputGroup>
-
-                <div style={{display: "grid", gridTemplateColumns: 'repeat(2, 1fr)', gridColumnGap: 20}}>
-                    <InputGroup title="Превью" style={{maxWidth: '50%'}}>
-                        <Controller
-                            control={control}
-                            defaultValue=""
-                            name="previewImg"
-                            rules={{
-                                required: "Это поле обязательно"
-                            }}
-                            render={({field: {onChange, value}, fieldState: {error}}) =>
-                                <ImageUploader
-                                    onChange={onChange}
-                                    value={value}
-                                    error={error}
-                                    placeholder="Превью"
+        <>
+            {
+                isLoading
+                    ? <div>loading...</div>
+                    : <Admin title={` > Статьи > ${article?.title}`}>
+                        <Form onSubmit={handleSubmit(onSubmit)} style={{maxWidth: '100%'}}>
+                            <InputGroup title="Заголовок" autoMargin>
+                                <Input
+                                    {...register('title', {
+                                        required: "Это поле обязательно"
+                                    })}
+                                    placeholder="Введите заголовок"
+                                    error={errors.title}
                                 />
-                            }
-                        />
-                    </InputGroup>
+                            </InputGroup>
 
-                    <InputGroup title="Баннер" style={{maxWidth: '50%'}}>
-                        <Controller
-                            control={control}
-                            defaultValue=""
-                            name="bannerImg"
-                            rules={{
-                                required: "Это поле обязательно"
-                            }}
-                            render={({field: {onChange, value}, fieldState: {error}}) =>
-                                <ImageUploader
-                                    onChange={onChange}
-                                    value={value}
-                                    error={error}
-                                    placeholder="banner"
+                            <InputGroup title="Текст" autoMargin>
+                                <Controller
+                                    control={control}
+                                    name="text"
+                                    defaultValue=""
+                                    rules={{
+                                        validate: {
+                                            required: (v) => (v && stripHtml(v).result.length > 0) || 'Это поле обязательно'
+                                        }
+                                    }}
+                                    render={({field: {value, onChange}, fieldState: {error}}) =>
+                                        <DynamicTextEditor
+                                            onChange={onChange}
+                                            value={value}
+                                            error={error}
+                                            placeholder="Текст статьи"
+                                        />
+                                    }
                                 />
-                            }
-                        />
-                    </InputGroup>
-                </div>
+                            </InputGroup>
 
-                <ButtonGreen>Сохранить</ButtonGreen>
-            </Form>
-        </Admin>
+                            <FieldsSection>
+                                <InputGroup title="Превью">
+                                    <Controller
+                                        control={control}
+                                        defaultValue=""
+                                        name="previewImg"
+                                        rules={{
+                                            required: "Это поле обязательно"
+                                        }}
+                                        render={({field: {onChange, value}, fieldState: {error}}) =>
+                                            <ImageUploader
+                                                onChange={onChange}
+                                                value={value}
+                                                error={error}
+                                                placeholder="Превью"
+                                            />
+                                        }
+                                    />
+                                </InputGroup>
+
+                                <InputGroup title="Баннер">
+                                    <Controller
+                                        control={control}
+                                        defaultValue=""
+                                        name="bannerImg"
+                                        rules={{}}
+                                        render={({field: {onChange, value}, fieldState: {error}}) =>
+                                            <ImageUploader
+                                                onChange={onChange}
+                                                value={value}
+                                                error={error}
+                                                placeholder="banner"
+                                            />
+                                        }
+                                    />
+                                </InputGroup>
+                            </FieldsSection>
+
+                            <ButtonGreen>Сохранить</ButtonGreen>
+                        </Form>
+                    </Admin>
+            }
+        </>
     );
 }
 

@@ -1,89 +1,71 @@
 import React, {FC, useState} from "react";
 import Admin from "@/components/Admin/Admin";
-import {SubmitHandler, useForm} from "react-hook-form";
-import Form from "@/components/Form/Form";
-import dynamic from "next/dynamic";
-import ButtonGreen from "@/UI/buttons/ButtonGreen/ButtonGreen";
 import styles from "./AdminArticles.module.scss";
-import Modal from "@/UI/modals/Modal/Modal";
 import {useArticles} from "@/webpages/AdminArticles/useArticles";
 import AdminArticleItem from "@/webpages/AdminArticles/AdminArticleItem/AdminArticleItem";
+import ButtonTransparent from "@/UI/buttons/ButtonTransparent/ButtonTransparent";
+import InputSearch from "@/UI/InputSearch/InputSearch";
+import SkeletonLoader from "@/components/UI/SkeletonLoader/SkeletonLoader";
+import Modal from "@/UI/modals/Modal/Modal";
+import ButtonGreen from "@/UI/buttons/ButtonGreen/ButtonGreen";
+import ButtonGroup from "@/UI/buttons/ButtonGroup/ButtonGroup";
 
-const DynamicTextEditor = dynamic(() => import('@/UI/InputGroup/TextEditor/TextEditor'), {
-    ssr: false
-})
 
-
-interface IArticlesFields {
-    img: File
-}
-
-const AdminUser: FC = () => {
-    const {articles, isLoading} = useArticles();
-    const [active, setActive] = useState(false);
+const AdminArticles: FC = () => {
+    const [activeModal, setActiveModal] = useState(false);
 
     const {
-        register,
-        handleSubmit,
-        formState: {errors},
-        reset,
-        resetField,
-        control,
-    } = useForm<IArticlesFields>({
-        mode: "onChange"
-    });
-
-    const onSubmit: SubmitHandler<IArticlesFields> = ({img}) => {
-        alert(`Your email ${img.name}`);
-        reset();
-    }
+        data, isLoading,
+        deleteAsync, searchTerm, handleSearch
+    } = useArticles();
+    const articles = data?.data;
 
     return (
         <Admin title={` > Статьи`}>
+            <ButtonTransparent
+                link="/admin/articles/create"
+                style={{maxWidth: '300px', marginBottom: 20}}
+            >Создать статью</ButtonTransparent>
+
+            <InputSearch
+                isPlaceholderLeft
+                searchTerm={searchTerm}
+                handleSearch={handleSearch}
+                placeholder="Поиск статей"
+            />
+
             {
                 isLoading
-                    ? <div>loading...</div>
-                    : <div>
-                        <ButtonGreen onClick={() => setActive(true)}>Создать статью</ButtonGreen>
-                        <div className={styles.articles}>
-                            {
-                                Array.isArray(articles?.data) && articles?.data?.map(article => (
-                                    <AdminArticleItem
-                                        article={article}
-                                        key={article.id}
-                                    />
-                                ))
-                            }
-                        </div>
-                        <Modal
-                            title="Новый баннер"
-                            active={active}
-                            setActive={setActive}
-                        >
-                            <Form onSubmit={handleSubmit(onSubmit)}>
-                                {/*<Controller*/}
-                                {/*    control={control}*/}
-                                {/*    defaultValue={undefined}*/}
-                                {/*    name="img"*/}
-                                {/*    rules={{*/}
-                                {/*        required: "Это поле обязательно"*/}
-                                {/*    }}*/}
-                                {/*    render={({field}) =>*/}
-                                {/*        <input*/}
-                                {/*            {...field}*/}
-                                {/*            type={"file"}*/}
-                                {/*        />*/}
-                                {/*    }*/}
-                                {/*/>*/}
-                                {errors.img?.message}
-                                <button>vfkd</button>
-                            </Form>
-                        </Modal>
+                    ? <div className={styles.articles}>
+                        <SkeletonLoader
+                            count={5}
+                            style={{
+                                height: 90,
+                                width: '100%',
+                                marginBottom: 20,
+                                borderRadius: 10
+                            }}
+                        />
                     </div>
+                    : articles && <div>
+                    <div className={styles.articles}>
+                        {
+                            articles.map(article => (
+                                <AdminArticleItem
+                                    article={article}
+                                    key={article.id}
+                                    setActiveModal={setActiveModal}
+                                    removeHandler={deleteAsync}
+                                    activeModal={activeModal}
+                                />
+                            ))
+                        }
+                    </div>
+                </div>
             }
         </Admin>
     );
 }
 
-export default AdminUser;
+export default AdminArticles;
 

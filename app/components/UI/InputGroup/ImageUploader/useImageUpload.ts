@@ -61,7 +61,6 @@ export const useUpload: TypeUpload = (onChange) => {
         setTimeout(() => {
             setIsLoading(false);
         }, 1000)
-        console.log(files)
         setDrag(false)
     }, [mutateAsync])
 

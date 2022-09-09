@@ -1,10 +1,11 @@
-@import "../../../../assets/scss/mixins/breakpoint";
+@import "../../../assets/scss/mixins/breakpoint";
 
 
 .search {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-left: 15px;
     width: 380px;
     height: 45px;
     position: relative;
@@ -31,6 +32,10 @@
         line-height: 100%;
         color: var(--color-black-or-white);
         padding: 0 36px;
+    }
+
+    &_left {
+        justify-content: left !important;
     }
 }
 

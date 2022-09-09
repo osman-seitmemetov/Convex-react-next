@@ -7,6 +7,7 @@ import MobileMenu from "@/components/MobileMenu/MobileMenu";
 import {QueryClient, QueryClientProvider} from "react-query";
 import {ThemeProvider} from "next-themes";
 import HeadProvider from "./HeadProvider/HeadProvider";
+import ReduxToastr from "@/components/UI/ReduxToastr/ReduxToastr";
 
 
 const queryClient = new QueryClient({
@@ -25,6 +26,7 @@ const MainProvider: FC<TypeComponentAuthFields> = ({children, Component}) => {
                 <QueryClientProvider client={queryClient}>
                     <ThemeProvider defaultTheme="light">
                         <AuthProvider Component={Component}>
+                            <ReduxToastr />
                             {children}
                             <MobileMenu/>
                         </AuthProvider>
